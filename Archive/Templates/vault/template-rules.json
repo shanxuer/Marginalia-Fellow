@@ -1,0 +1,155 @@
+{
+  "skip": [
+    ".obsidian/**",
+    ".pandoc/**",
+    ".git/**",
+    "Archive/Templates/**",
+    "obsidian-research-vault/**"
+  ],
+  "rules": [
+    {
+      "name": "project-literature-note",
+      "patterns": ["Projects/*/reference/literature/**/*.md"],
+      "template": "Archive/Templates/vault/project-literature-note.md",
+      "required_frontmatter": {"type": "literature"},
+      "required_frontmatter_keys": ["status", "created", "citekey"],
+      "required_headings": ["Citation", "一句话价值", "核心贡献", "可借用内容", "对项目的启发", "Annotations"]
+    },
+    {
+      "name": "project-meeting-note",
+      "patterns": ["Projects/*/meeting/*.md"],
+      "template": "Archive/Templates/vault/project-meeting-note.md",
+      "required_frontmatter": {"type": "meeting-note"},
+      "required_frontmatter_keys": ["status", "created", "date"],
+      "required_headings": ["结论", "反馈", "决策", "行动", "未决问题"]
+    },
+    {
+      "name": "project-paper-draft",
+      "patterns": ["Projects/*/paper/*.md"],
+      "template": "Archive/Templates/vault/project-paper-draft.md",
+      "required_frontmatter": {"type": "paper-draft"},
+      "required_frontmatter_keys": ["status", "created"],
+      "required_headings": ["核心论点", "贡献", "论证结构", "当前弱点", "下一轮修改"]
+    },
+    {
+      "name": "project-reference-note",
+      "patterns": ["Projects/*/reference/*.md"],
+      "template": "Archive/Templates/vault/project-reference-note.md",
+      "required_frontmatter": {"type": "project-reference"},
+      "required_frontmatter_keys": ["status", "created"],
+      "required_headings": ["核心结论", "证据", "对项目的影响", "待确认", "关联"]
+    },
+    {
+      "name": "project-index",
+      "patterns": ["Projects/*/Readme.md", "Projects/*/*.md"],
+      "template": "Archive/Templates/vault/project-index.md",
+      "required_frontmatter": {"type": "project-index"},
+      "required_frontmatter_keys": ["status", "created"],
+      "required_headings": ["核心问题", "当前判断", "关键资产", "决策记录", "下一步"]
+    },
+    {
+      "name": "projects-root-note",
+      "patterns": ["Projects/*.md"],
+      "template": "Archive/Templates/vault/projects-root-note.md",
+      "required_frontmatter": {"type": "projects-overview"},
+      "required_frontmatter_keys": ["status", "created"],
+      "required_headings": ["项目视角", "当前判断", "决策价值", "下一步"]
+    },
+    {
+      "name": "guiding-principle",
+      "patterns": ["Ideas/Guiding Principles/*.md"],
+      "template": "Archive/Templates/vault/ideas-guiding-principle.md",
+      "required_frontmatter": {"type": "guiding-principle"},
+      "required_frontmatter_keys": ["status", "created"],
+      "required_headings": ["核心原则", "适用判断", "价值", "张力", "关联"]
+    },
+    {
+      "name": "current-reflection",
+      "patterns": ["Ideas/Current Reflections/*.md"],
+      "template": "Archive/Templates/vault/ideas-current-reflection.md",
+      "required_frontmatter": {"type": "current-reflection"},
+      "required_frontmatter_keys": ["status", "created"],
+      "required_headings": ["触发", "核心洞察", "研究价值", "未决问题", "关联"]
+    },
+    {
+      "name": "idea-concept",
+      "patterns": ["Ideas/Idea Concepts/*.md"],
+      "template": "Archive/Templates/vault/idea-concept.md",
+      "required_frontmatter": {"type": "idea-concept"},
+      "required_frontmatter_keys": ["status", "created"],
+      "required_headings": ["核心想法", "研究价值", "可验证形态", "关键张力", "下一步", "关联"]
+    },
+    {
+      "name": "ideas-root-note",
+      "patterns": ["Ideas/*.md"],
+      "template": "Archive/Templates/vault/ideas-root-note.md",
+      "required_frontmatter": {"type": "ideas-overview"},
+      "required_frontmatter_keys": ["status", "created"],
+      "required_headings": ["核心判断", "为什么重要", "关联线索", "可复用方式"]
+    },
+    {
+      "name": "classic-paper",
+      "patterns": ["Library/Classic Papers/*.md"],
+      "template": "Archive/Templates/vault/library-classic-paper.md",
+      "required_frontmatter": {"type": "classic-paper"},
+      "required_frontmatter_keys": ["status", "created", "citekey"],
+      "required_headings": ["Citation", "一句话价值", "核心贡献", "可迁移概念", "可引用论点", "局限与张力", "关联"]
+    },
+    {
+      "name": "core-theory",
+      "patterns": ["Library/Core Theories/*.md"],
+      "template": "Archive/Templates/vault/library-core-theory.md",
+      "required_frontmatter": {"type": "core-theory"},
+      "required_frontmatter_keys": ["status", "created"],
+      "required_headings": ["定义", "核心命题", "解释力", "边界", "关联"]
+    },
+    {
+      "name": "research-method",
+      "patterns": ["Library/Research Method/*.md"],
+      "template": "Archive/Templates/vault/library-method.md",
+      "required_frontmatter": {"type": "research-method"},
+      "required_frontmatter_keys": ["status", "created"],
+      "required_headings": ["适用问题", "核心设计", "证据", "分析与判断", "效度风险", "关联"]
+    },
+    {
+      "name": "library-root-note",
+      "patterns": ["Library/*.md"],
+      "template": "Archive/Templates/vault/library-root-note.md",
+      "required_frontmatter": {"type": "library-overview"},
+      "required_frontmatter_keys": ["status", "created"],
+      "required_headings": ["核心框架", "关键资产", "复用场景", "关联"]
+    },
+    {
+      "name": "paper-output",
+      "patterns": ["Archive/Paper Outputs/**/*.md"],
+      "template": "Archive/Templates/vault/archive-paper-output.md",
+      "required_frontmatter": {"type": "paper-output"},
+      "required_frontmatter_keys": ["status", "created"],
+      "required_headings": ["成品", "状态", "版本", "可复用价值", "经验", "关联"]
+    },
+    {
+      "name": "project-record",
+      "patterns": ["Archive/Project Records/**/*.md"],
+      "template": "Archive/Templates/vault/archive-project-record.md",
+      "required_frontmatter": {"type": "project-record"},
+      "required_frontmatter_keys": ["status", "created"],
+      "required_headings": ["项目结论", "有效做法", "失败原因", "可复用经验", "资产"]
+    },
+    {
+      "name": "talk-material",
+      "patterns": ["Archive/Talk Materials/**/*.md"],
+      "template": "Archive/Templates/vault/archive-talk-material.md",
+      "required_frontmatter": {"type": "talk-material"},
+      "required_frontmatter_keys": ["status", "created"],
+      "required_headings": ["核心信息", "受众", "结构", "可复用表达", "资产"]
+    },
+    {
+      "name": "archive-index-note",
+      "patterns": ["Archive/*.md"],
+      "template": "Archive/Templates/vault/archive-index-note.md",
+      "required_frontmatter": {"type": "archive-index"},
+      "required_frontmatter_keys": ["status", "created"],
+      "required_headings": ["归档价值", "核心内容", "可复用经验", "关联"]
+    }
+  ]
+}

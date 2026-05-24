@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eu
+
+repo_root="$(git rev-parse --show-toplevel)"
+cd "$repo_root"
+
+# Enforce the vault rule: commits may add new files only, and new notes must
+# follow their folder template.
+python3 scripts/check_new_note_templates.py

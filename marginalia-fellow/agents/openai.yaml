@@ -1,0 +1,4 @@
+interface:
+  display_name: "Marginalia Fellow"
+  short_description: "Templates, routing, add-only checks"
+  default_prompt: "Use $marginalia-fellow to add or audit notes in the Obsidian research vault."
