@@ -56,6 +56,10 @@ def is_markdown(path: str) -> bool:
     return path.lower().endswith(".md")
 
 
+def is_readme(path: str) -> bool:
+    return Path(path).name.lower() == "readme.md"
+
+
 def is_skipped(path: str, skip_patterns: list[str]) -> bool:
     return any(fnmatch.fnmatchcase(path, pattern) for pattern in skip_patterns)
 
@@ -114,7 +118,7 @@ def missing_headings_in_order(headings: list[str], required: list[str]) -> list[
 def validate_path(root: Path, path: str, config: dict) -> list[str]:
     errors: list[str] = []
 
-    if not is_markdown(path) or is_skipped(path, config.get("skip", [])):
+    if not is_markdown(path) or is_readme(path) or is_skipped(path, config.get("skip", [])):
         return errors
 
     rule = match_rule(path, config.get("rules", []))
@@ -277,7 +281,7 @@ def main() -> int:
     errors = []
     checked = 0
     for path in paths:
-        if is_markdown(path) and not is_skipped(path, config.get("skip", [])):
+        if is_markdown(path) and not is_readme(path) and not is_skipped(path, config.get("skip", [])):
             checked += 1
         errors.extend(validate_path(root, path, config))
 

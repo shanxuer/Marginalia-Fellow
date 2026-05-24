@@ -4,6 +4,7 @@ An add-only research vault companion for scholarly notes, templates, and quiet j
 
 This kit provides:
 
+- a reusable folder scaffold for scholarly Obsidian vaults
 - folder-specific Markdown templates for `Ideas/`, `Library/`, `Projects/`, and `Archive/`
 - `Archive/Templates/vault/template-rules.json` as the folder-to-template validation source of truth
 - pre-commit enforcement for add-only commits and newly added note templates
@@ -14,6 +15,10 @@ This kit provides:
 ## Layout
 
 ```text
+Ideas/                          Early thinking, principles, and current reflections
+Library/                        Stable reusable knowledge
+Projects/_project-template/     Active project scaffold
+Archive/                        Completed outputs, records, talks, and templates
 Archive/Templates/vault/        Markdown templates and template rules
 scripts/                        Validation and add-only rewrite scripts
 .githooks/pre-commit            Git hook for local enforcement
@@ -25,6 +30,10 @@ marginalia-fellow/              Codex skill for folder routing and audits
 Copy these folders into the root of an Obsidian vault:
 
 ```bash
+Ideas
+Library
+Projects
+Archive
 Archive/Templates/vault
 scripts
 .githooks
@@ -60,6 +69,8 @@ python3 scripts/rewrite_nonconforming_notes_2026_05_23.py --dry-run
 ## Add-Only Rule
 
 Agents should only add files. They should not modify, delete, rename, or move existing notes. If a note does not match its folder template, create a new companion rewrite with `source: <old-path>` in frontmatter.
+
+Folder `Readme.md` files are allowed as directory guides and are not forced to use the note templates. All other governed Markdown notes must match the template for their folder.
 
 ## Notes
 
