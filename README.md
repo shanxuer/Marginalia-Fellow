@@ -128,123 +128,22 @@ git config core.hooksPath .githooks
 
 ## Obsidian Git + Shell Commands Setup
 
-The recommended setup is to let normal Obsidian Git commits stay guarded by the pre-commit hook, and expose a separate manual shell command for rare forced commits.
-
-This gives you two paths:
-
-- **Normal commit path**: Obsidian Git runs `git commit` and the hook blocks unsafe changes.
-- **Forced commit path**: a manual Shell Commands action runs `git commit --no-verify` and bypasses the hook.
-
-Do not confuse this with `git push --force`. This section is about forcing a local commit past validation, not rewriting remote history.
-
-### 1. Enable the hook in the vault
-
-Run this once from the vault root:
+Use Obsidian Git for everyday sync, and let Git hooks enforce the vault rules. From the vault root, enable the included hook once:
 
 ```bash
 git config core.hooksPath .githooks
 chmod +x .githooks/pre-commit
-python3 scripts/check_new_note_templates.py --self-test
 ```
 
-Verify that the hook blocks normal unsafe commits:
+After that, normal commits made by Obsidian Git will go through `.githooks/pre-commit`. This is the guarded path: modifications, deletions, renames, and nonconforming new notes can be blocked before they enter git history.
 
-```bash
-git add -A
-git commit -m "test guarded commit"
-```
+Use Shell Commands only for explicit manual actions. A practical setup is:
 
-If the staged changes include modifications, deletions, renames, or nonconforming new notes, the commit should fail.
+- **Audit**: `python3 scripts/audit_vault_integrity_2026_05_23.py --no-fail`
+- **Guarded commit**: `git add -A && git commit -m "vault: sync" && git push`
+- **Forced commit**: `git add -A && git commit --no-verify -m "vault: forced sync" && git push`
 
-### 2. Configure Obsidian Git for guarded commits
-
-In the Obsidian Git plugin:
-
-1. Use the vault root as the git repository.
-2. Keep the plugin on normal `git commit` behavior.
-3. Use a clear commit message such as:
-
-```text
-vault: sync {{date}}
-```
-
-4. Do not configure Obsidian Git to bypass hooks.
-5. If you use automatic commit-and-sync, keep it on the guarded path.
-
-With `core.hooksPath` enabled, Obsidian Git does not need special integration with this kit. Git itself runs `.githooks/pre-commit` before the commit is created.
-
-### 3. Add a manual audit command
-
-If you use the Obsidian Shell Commands plugin, create a command named:
-
-```text
-Marginalia: audit vault
-```
-
-Set its working directory to the vault root. If your shell command plugin does not support a working-directory field, prefix the command with `cd "/path/to/vault" &&`.
-
-Command:
-
-```bash
-python3 scripts/audit_vault_integrity_2026_05_23.py --no-fail
-```
-
-This command reports problems without changing files.
-
-### 4. Add a guarded manual commit command
-
-Create a shell command named:
-
-```text
-Marginalia: guarded commit and push
-```
-
-Command:
-
-```bash
-git add -A && git commit -m "vault: guarded sync" && git push
-```
-
-This uses the normal hook. It should fail if the vault violates the add-only policy or if new notes do not match their templates.
-
-### 5. Add a forced commit command
-
-Create a separate shell command named:
-
-```text
-Marginalia: force commit and push
-```
-
-Command:
-
-```bash
-git add -A && git commit --no-verify -m "vault: forced sync" && git push
-```
-
-Use this only when you intentionally want to commit something that the hook blocks. Typical cases:
-
-- You manually edited an existing note and want to preserve it.
-- You are committing a repository maintenance change.
-- You need to save a temporary broken state before cleanup.
-
-Before running the forced command, run:
-
-```bash
-git status --short
-python3 scripts/audit_vault_integrity_2026_05_23.py --no-fail
-```
-
-The forced command should be manual, visible, and named clearly. Do not bind it to automatic sync.
-
-### 6. Optional safer forced commit
-
-If you want a forced commit that still prints the audit report first, use:
-
-```bash
-python3 scripts/audit_vault_integrity_2026_05_23.py --no-fail && git add -A && git commit --no-verify -m "vault: forced sync" && git push
-```
-
-This still bypasses the hook, but it shows the current problems before committing.
+The forced command should be rare, manual, and clearly named. It bypasses local validation with `--no-verify`; it is not the same as `git push --force` and does not rewrite remote history.
 
 ## Start A New Project
 
